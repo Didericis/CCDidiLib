@@ -1,3 +1,6 @@
+--Website: https://github.com/Didericis/CCDidiLib
+--Author: Didericis
+
 function rev(dir)
   if dir=='left' then
     return 'right'

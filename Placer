@@ -1,3 +1,6 @@
+--Website: https://github.com/Didericis/CCDidiLib
+--Author: Didericis
+
 os.loadAPI('./ItemSelector')
 os.loadAPI('./Digger')
 os.loadAPI('./Traveller')
@@ -31,15 +34,18 @@ local function placeLine(dir, item, len)
     Traveller.turn(RevDir.rev(dir))
     dir='back'
   end
+
   for i=1,len do
     Traveller.go(dir)
     if not placeOne(RevDir.rev(dir)) then
       return false
     end
   end
+
   if dir=='back' then
     Traveller.turn('back')
   end
+
   return true
 end
 
@@ -55,9 +61,11 @@ end
 
 local function replaceOne(dir)
   Digger.dig(dir)
+
   if Traveller.isTurnDir(dir) then
     dir='forward'
   end
+
   return placeOne(dir)
 end
 
@@ -77,17 +85,4 @@ function replace(dir, item, len)
   else
     return false
   end
-end
-
-local function cmd(args)
-  local dir=args[1]
-  local item=args[2]
-  local len=args[3]
-  
-  place(dir, item, len)
-end
-
-local args={...}
-if shell then
-  cmd(args)
 end

@@ -5,7 +5,8 @@ function dropQuarry(dir)
     
     if detail then
       name=detail.name
-    end   
+    end 
+      
     if (not (name=='minecraft:cobblestone')) and (not (name=='minecraft:torch')) then
       turtle.select(i)
       if (not dir) or (dir=='forward') then
@@ -30,14 +31,4 @@ function dropAll(dir)
       turtle.dropDown()
     end
   end
-end
-
-local function cmd(args)
-  local dir=args[1]
-  dropQuarry(dir)
-end
-
-local args={...}
-if shell then
-  cmd(args)
 end

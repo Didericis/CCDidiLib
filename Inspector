@@ -1,3 +1,6 @@
+--Website: https://github.com/Didericis/CCDidiLib
+--Author: Didericis
+
 function inspect(dir)
   if not dir or dir=='forward' then
     return turtle.inspect()

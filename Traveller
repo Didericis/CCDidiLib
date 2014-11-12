@@ -1,14 +1,17 @@
+--Website: https://github.com/Didericis/CCDidiLib
+--Author: Didericis
+
 os.loadAPI('./Turner')
 os.loadAPI('./RevDir')
 os.loadAPI('./Digger')
 
 local function goPriv(dir, len, dig)
-  local success=false
   local loopNum=1
 
   if not len then
     len=1
   end
+
   if not dig then
     dig=false
   end
@@ -19,15 +22,19 @@ local function goPriv(dir, len, dig)
   end
 
   for i=1,len do
-    success=false
+    local success=false
+
     while not success do
       loopNum=loopNum+1
+
       if loopNum>100 then
         error('Turtle stuck')
       end
+
       if dig then
         Digger.dig(dir)
       end
+
       if not dir or dir=='forward' then
         success=turtle.forward()
       elseif dir=='back' then
@@ -43,17 +50,12 @@ local function goPriv(dir, len, dig)
   end
 end
 
-function turn(dir)
-  if dir=='right' then
-    turtle.turnRight()
-  elseif dir=='left' then
-    turtle.turnLeft()
-  elseif dir=='back' then
-    turtle.turnLeft()
-    turtle.turnLeft()
-  else
-    error('No turn direction '..dir)
-  end
+function go(dir, len)
+  goPriv(dir, len, false)
+end
+
+function goDig(dir, len)
+  goPriv(dir, len, true)
 end
 
 function isTurnDir(dir)
@@ -72,18 +74,24 @@ function isTurnDirS(dir)
   end
 end
 
-function go(dir, len)
-  goPriv(dir, len, false)
-end
-
-function goDig(dir, len)
-  goPriv(dir, len, true)
+function turn(dir)
+  if dir=='right' then
+    turtle.turnRight()
+  elseif dir=='left' then
+    turtle.turnLeft()
+  elseif dir=='back' then
+    turtle.turnLeft()
+    turtle.turnLeft()
+  else
+    error('No turn direction '..dir)
+  end
 end
 
 function shift(dir, len)
   if (not (dir=='right')) and (not (dir=='left')) then
     error('Can only shift right or left, not '..dir)
   end
+
   go(dir, len)
   turn(RevDir.rev(dir))
 end
