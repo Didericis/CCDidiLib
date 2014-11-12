@@ -1,0 +1,32 @@
+os.loadAPI('./Traveller')
+
+function dig(dir)
+  if not dir or dir=='forward' then
+    return turtle.dig()
+  elseif dir=='up' then
+    return turtle.digUp()
+  elseif dir=='down' then
+    return turtle.digDown()
+  elseif Traveller.isTurnDirS(dir) then
+    Traveller.turn(dir)
+    return turtle.dig()
+  else
+    return false
+  end
+end
+
+function digLine(dir, len)
+  if not len then
+    len=1
+  end
+
+  if Traveller.isTurnDirS(dir) then
+    Traveller.turn(dir)
+    dir='forward'
+  end
+
+  for i=1,len do
+    dig(dir)
+    Traveller.go(dir)
+  end
+end

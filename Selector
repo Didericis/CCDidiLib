@@ -1,0 +1,26 @@
+function select(itemName)
+  if getSlotNum(itemName) > 0 then
+    turtle.select(getSlotNum(itemName))
+    return true
+  else
+    return false
+  end
+end
+
+function getSlotNum(itemName)
+  local slotNum=turtle.getSelectedSlot()
+  local detail=turtle.getItemDetail(slotNum)
+  
+  if detail and detail['name']==itemName then
+    return slotNum
+  else
+    for i=1,16 do
+      detail=turtle.getItemDetail(i)
+      if detail and detail['name']==itemName then
+        turtle.select(i)
+        return i
+      end
+    end
+    return -1
+  end
+end 

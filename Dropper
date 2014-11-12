@@ -1,0 +1,43 @@
+function dropQuarry(dir)
+  for i=1,16 do
+    local detail=turtle.getItemDetail(i)
+    local name=''
+    
+    if detail then
+      name=detail.name
+    end   
+    if (not (name=='minecraft:cobblestone')) and (not (name=='minecraft:torch')) then
+      turtle.select(i)
+      if (not dir) or (dir=='forward') then
+        turtle.drop()
+      elseif dir=='up' then
+        turtle.dropUp()
+      elseif dir=='down' then
+        turtle.dropDown()
+      end
+    end
+  end
+end
+
+function dropAll(dir)
+  for i=1,16 do
+    turtle.select(i)
+    if (not dir or dir=='forward') then
+      turtle.drop()
+    elseif dir=='up' then
+      turtle.dropUp()
+    elseif dir=='down' then
+      turtle.dropDown()
+    end
+  end
+end
+
+local function cmd(args)
+  local dir=args[1]
+  dropQuarry(dir)
+end
+
+local args={...}
+if shell then
+  cmd(args)
+end

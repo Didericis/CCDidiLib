@@ -1,0 +1,9 @@
+function inspect(dir)
+  if not dir or dir=='forward' then
+    return turtle.inspect()
+  elseif dir=='up' then
+    return turtle.inspectUp()
+  elseif dir=='down' then
+    return turtle.inspectDown()
+  end
+end

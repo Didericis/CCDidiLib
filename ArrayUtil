@@ -1,0 +1,10 @@
+function contains(table, item)
+  local i=1
+  while table[i] do
+    if table[i] == item then
+      return true
+    end
+    i=i+1
+  end
+  return false
+end

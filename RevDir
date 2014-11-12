@@ -1,0 +1,17 @@
+function rev(dir)
+  if dir=='left' then
+    return 'right'
+  elseif dir=='right' then
+    return 'left'
+  elseif dir=='back' then
+    return 'forward'
+  elseif dir=='forward' then
+    return 'back'
+  elseif dir=='up' then
+    return 'down'
+  elseif dir=='down' then
+    return 'up'
+  else
+    error('Direction '..dir..'not found')
+  end
+end

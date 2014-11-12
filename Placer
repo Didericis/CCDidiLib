@@ -1,0 +1,93 @@
+os.loadAPI('./ItemSelector')
+os.loadAPI('./Digger')
+os.loadAPI('./Traveller')
+os.loadAPI('./RevDir')
+
+local function placeOne(dir)
+  if not dir or dir=='forward' then
+    return turtle.place()
+  elseif dir=='up' then
+    return turtle.placeUp()
+  elseif dir=='down' then
+    return turtle.placeDown()
+  elseif dir=='left' or dir=='right' then
+    Traveller.turn(dir)
+    return turtle.place()
+  else
+    return false
+  end
+end
+
+local function placeItem(item, dir)
+  if ItemSelector.select(item) then
+    return place(dir)
+  else
+    return false
+  end
+end
+
+local function placeLine(dir, item, len)
+  if dir == 'left' or dir=='right' or dir=='forward' then
+    Traveller.turn(RevDir.rev(dir))
+    dir='back'
+  end
+  for i=1,len do
+    Traveller.go(dir)
+    if not placeOne(RevDir.rev(dir)) then
+      return false
+    end
+  end
+  if dir=='back' then
+    Traveller.turn('back')
+  end
+  return true
+end
+
+function place(dir, item, len)
+  if not item and not len then
+    return placeOne(dir)
+  elseif item and not len then
+    return placeItem(item, dir)
+  elseif item and len then
+    placeLine(dir, item, len)
+  end
+end
+
+local function replaceOne(dir)
+  Digger.dig(dir)
+  if Traveller.isTurnDir(dir) then
+    dir='forward'
+  end
+  return placeOne(dir)
+end
+
+local function replaceItem(item, dir)
+  if ItemSelector.select(item) then
+    return replaceOne(dir)
+  else
+    return false
+  end
+end
+
+function replace(dir, item, len)
+  if not item and not len then
+    return replaceOne(dir)
+  elseif item and not len then
+    return replaceItem(item, dir)
+  else
+    return false
+  end
+end
+
+local function cmd(args)
+  local dir=args[1]
+  local item=args[2]
+  local len=args[3]
+  
+  place(dir, item, len)
+end
+
+local args={...}
+if shell then
+  cmd(args)
+end
