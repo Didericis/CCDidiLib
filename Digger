@@ -1,3 +1,6 @@
+--Website: https://github.com/Didericis/CCDidiLib
+--Author: Didericis
+
 os.loadAPI('./Traveller')
 
 function dig(dir)
