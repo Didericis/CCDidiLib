@@ -1,8 +1,8 @@
 --Website: https://github.com/Didericis/CCDidiLib
 --Author: Didericis
 
-os.loadAPI('./RevDir')
-os.loadAPI('./Digger')
+os.loadAPI('/lib/CCDidiLib/RevDir')
+os.loadAPI('/lib/CCDidiLib/Digger')
 
 function isTurnDir(dir)
   if dir=='left' or dir=='right' then

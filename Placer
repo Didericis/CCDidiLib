@@ -1,10 +1,10 @@
 --Website: https://github.com/Didericis/CCDidiLib
 --Author: Didericis
 
-os.loadAPI('./ItemSelector')
-os.loadAPI('./Digger')
-os.loadAPI('./Traveller')
-os.loadAPI('./RevDir')
+os.loadAPI('/lib/CCDidiLib/ItemSelector')
+os.loadAPI('/lib/CCDidiLib/Digger')
+os.loadAPI('/lib/CCDidiLib/Traveller')
+os.loadAPI('/lib/CCDidiLib/RevDir')
 
 local function placeOne(dir)
   if not dir or dir=='forward' then
