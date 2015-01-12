@@ -44,7 +44,7 @@ local function goPriv(dir, len, dig)
     dig=false
   end
 
-  if (dig and Turner.isTurnDirS(dir)) or Turner.isTurnDir(dir) then
+  if (dig and isTurnDirS(dir)) or isTurnDir(dir) then
     turn(dir)
     dir='forward'
   end
