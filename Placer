@@ -1,7 +1,7 @@
 --Website: https://github.com/Didericis/CCDidiLib
 --Author: Didericis
 
-os.loadAPI('/lib/CCDidiLib/ItemSelector')
+os.loadAPI('/lib/CCDidiLib/Selector')
 os.loadAPI('/lib/CCDidiLib/Digger')
 os.loadAPI('/lib/CCDidiLib/Traveller')
 os.loadAPI('/lib/CCDidiLib/RevDir')
@@ -22,7 +22,7 @@ local function placeOne(dir)
 end
 
 local function placeItem(item, dir)
-  if ItemSelector.select(item) then
+  if Selector.select(item) then
     return place(dir)
   else
     return false
@@ -70,7 +70,7 @@ local function replaceOne(dir)
 end
 
 local function replaceItem(item, dir)
-  if ItemSelector.select(item) then
+  if Selector.select(item) then
     return replaceOne(dir)
   else
     return false
